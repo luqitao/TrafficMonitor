@@ -115,6 +115,9 @@
     <Filter Include="源文件和头文件\公共的类\CVariant">
       <UniqueIdentifier>{1ca17ad5-07ba-4361-bbeb-fdc5047697fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件和头文件\HuobiApi">
+      <UniqueIdentifier>{ef45eff7-0b1f-458d-8131-5575186b6dfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -249,6 +252,24 @@
     <ClInclude Include="DrawCommonEx.h">
       <Filter>源文件和头文件\公共的类\DrawCommon</Filter>
     </ClInclude>
+    <ClInclude Include="HuobiApi\base64.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
+    <ClInclude Include="HuobiApi\hmac-sha256.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
+    <ClInclude Include="HuobiApi\huobiAPI.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
+    <ClInclude Include="HuobiApi\my_URL.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
+    <ClInclude Include="HuobiApi\NetworkRequest.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
+    <ClInclude Include="HuobiApi\time2xtime.h">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ListCtrlEx.cpp">
@@ -368,6 +389,24 @@
     <ClCompile Include="DrawCommonEx.cpp">
       <Filter>源文件和头文件\公共的类\DrawCommon</Filter>
     </ClCompile>
+    <ClCompile Include="HuobiApi\base64.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
+    <ClCompile Include="HuobiApi\hmac-sha256.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
+    <ClCompile Include="HuobiApi\huobiAPI.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
+    <ClCompile Include="HuobiApi\my_URL.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
+    <ClCompile Include="HuobiApi\NetworkRequest.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
+    <ClCompile Include="HuobiApi\time2xtime.cpp">
+      <Filter>源文件和头文件\HuobiApi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TrafficMonitor.rc">
@@ -402,6 +441,15 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\notify_preview.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\CoinPriceMonitor.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\CoinPriceMonitor.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

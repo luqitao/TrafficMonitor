@@ -37,6 +37,8 @@ public:
 	//以下数据定义为App类中的公共成员，以便于在主对话框和任务栏窗口中都能访问
 	unsigned int m_in_speed{};		//下载速度
 	unsigned int m_out_speed{};		//上传速度
+	CString m_btc_price;		//BTC 价格
+	CString m_bch_price;		//BCH价格
 	int m_cpu_usage{};		//CPU利用率
 	int m_memory_usage{};	//内存利用率
 	int m_used_memory{};	//可用物理内存（单位为KB）

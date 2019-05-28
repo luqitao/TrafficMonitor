@@ -11,7 +11,12 @@
 #define new DEBUG_NEW
 #endif
 
-
+#include "HuobiApi/hmac-sha256.h"
+#include "HuobiApi/base64.h" 
+#include "HuobiApi/my_URL.h"
+#include "HuobiApi/time2xtime.h"
+#include "HuobiApi/huobiAPI.h"
+#pragma comment(lib,"wininet.lib")
 
 // CTrafficMonitorDlg 对话框
 
@@ -21,7 +26,7 @@ unsigned int CTrafficMonitorDlg::m_WM_TASKBARCREATED{ ::RegisterWindowMessage(_T
 CTrafficMonitorDlg::CTrafficMonitorDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_TRAFFICMONITOR_DIALOG, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_COIN_ICON);
 }
 
 CTrafficMonitorDlg::~CTrafficMonitorDlg()
@@ -97,14 +102,17 @@ END_MESSAGE_MAP()
 void CTrafficMonitorDlg::ShowInfo()
 {
 	CString str;
-	CString in_speed = CCommon::DataSizeToString(theApp.m_in_speed, theApp.m_main_wnd_data);
-	CString out_speed = CCommon::DataSizeToString(theApp.m_out_speed, theApp.m_main_wnd_data);
+	// CString in_speed = CCommon::DataSizeToString(theApp.m_in_speed, theApp.m_main_wnd_data);
+	// CString out_speed = CCommon::DataSizeToString(theApp.m_out_speed, theApp.m_main_wnd_data);
+	CString in_speed(theApp.m_bch_price);
+	CString out_speed(theApp.m_btc_price);
 
 	CString format_str;
 	if (theApp.m_main_wnd_data.hide_unit && theApp.m_main_wnd_data.speed_unit != SpeedUnit::AUTO)
 		format_str = _T("%s%s");
 	else
 		format_str = _T("%s%s/s");
+	format_str = _T("%s%s");
 	if (!theApp.m_main_wnd_data.swap_up_down)
 	{
 		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.up.c_str()), out_speed.GetString());
@@ -836,10 +844,10 @@ BOOL CTrafficMonitorDlg::OnInitDialog()
 		theApp.m_cfg_data.m_show_notify_icon = true;
 
 	//载入通知区图标
-	theApp.m_notify_icons[0] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_NOFITY_ICON), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
-	theApp.m_notify_icons[1] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_NOFITY_ICON2), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
-	theApp.m_notify_icons[2] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_NOFITY_ICON3), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
-	theApp.m_notify_icons[3] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_MAINFRAME), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
+	theApp.m_notify_icons[0] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_COIN_ICON), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
+	theApp.m_notify_icons[1] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_COIN_ICON), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
+	theApp.m_notify_icons[2] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_COIN_ICON), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
+	theApp.m_notify_icons[3] = (HICON)LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_COIN_ICON), IMAGE_ICON, theApp.DPI(16), theApp.DPI(16), LR_DEFAULTCOLOR | LR_CREATEDIBSECTION);
 
 	//设置通知区域图标
 	m_ntIcon.cbSize = sizeof(NOTIFYICONDATA);	//该结构体变量的大小
@@ -908,10 +916,37 @@ BOOL CTrafficMonitorDlg::OnInitDialog()
 		SetTransparency(0);
 
 	SetTimer(TASKBAR_TIMER, 100, NULL);
-
+	m_pGetCoinPriceThread = AfxBeginThread(GetCoinPriceThreadFunc, this);		//启动获取币价的线程
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
+
+UINT CTrafficMonitorDlg::GetCoinPriceThreadFunc(LPVOID lpParam)
+{
+	CCommon::SetThreadLanguage(theApp.m_general_data.language);		//设置线程语言
+	CTrafficMonitorDlg* p_instance = (CTrafficMonitorDlg*)lpParam;
+	if (!IsWindow(p_instance->GetSafeHwnd()))		//如果当前对话框已经销毁，则退出线程
+		return 0;
+	huobiAPI god;
+
+	// 调用火币api获取价格
+	while (true)
+	{
+		CString instr[2] = { _T("symbol"), _T("=btcusdt") };
+		CString msg = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr, 2);
+		// wcout << "btcusdt\t" << msg.GetString() << endl;
+		theApp.m_btc_price = msg;
+		Sleep(200);
+
+		CString instr2[2] = { _T("symbol"), _T("=bchusdt") };
+		CString msg2 = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr2, 2);
+		// wcout << "bchusdt\t" << msg2.GetString() << endl;
+		theApp.m_bch_price = msg2;
+		p_instance->ShowInfo();
+		Sleep(200);
+	}
+	return 0;
+}
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
@@ -1493,7 +1528,7 @@ void CTrafficMonitorDlg::OnClose()
 
 	if (m_tBarDlg != nullptr)
 		m_tBarDlg->OnCancel();
-
+	TerminateThread(m_pGetCoinPriceThread->m_hThread, 0);
 	CDialogEx::OnClose();
 }
 

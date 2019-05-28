@@ -56,7 +56,7 @@ BOOL CMessageDlg::OnInitDialog()
 
 	// TODO:  在此添加额外的初始化
 
-	SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME), FALSE);		// 设置小图标
+	SetIcon(AfxGetApp()->LoadIcon(IDI_COIN_ICON), FALSE);		// 设置小图标
 
 	//获取初始时窗口的大小
 	CRect rect;

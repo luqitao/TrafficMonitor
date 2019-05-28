@@ -39,6 +39,8 @@ public:
 
 // 实现
 protected:
+	CWinThread* m_pGetCoinPriceThread;			//获取币价的线程
+	static UINT GetCoinPriceThreadFunc(LPVOID lpParam);
 	HICON m_hIcon;
 	CMenu m_menu;		//右键菜单对象
 	NOTIFYICONDATA m_ntIcon;	//通知区域图标
@@ -90,7 +92,7 @@ protected:
 	bool m_menu_popuped{ false };				//指示当前是否有菜单处于弹出状态
 
 
-	void ShowInfo();		//将上传下载速度信息显示到窗口中
+	
 	CString GetMouseTipsInfo();		//获取鼠标提示信息
 	void SetTransparency();			//根据m_transparency的值设置窗口透明度
 	void SetTransparency(int transparency);
@@ -127,6 +129,7 @@ protected:
 	void SetTextFont();
 
 public:
+	void ShowInfo();		//将上传下载速度信息显示到窗口中
 	void ApplySettings();
 
 protected:

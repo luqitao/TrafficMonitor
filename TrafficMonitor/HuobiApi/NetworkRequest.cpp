@@ -147,11 +147,9 @@ CString GetRequest(CString sendmsg)
 {
 	HINTERNET internetopen;
 	HINTERNET internetopenurl;
-	BOOL internetreadfile;
+	BOOL bRet = TRUE;
 	DWORD byteread = 0;
-	char buffer[1];
-	//char ch;
-	memset(buffer, 0, 1);
+	char buffer[500] = {0};
 	internetopen = InternetOpen(_T("Testing"), INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
 	if (internetopen == NULL) {
 		//cout << "InternetOpen初始化失败!" << endl;
@@ -164,18 +162,28 @@ CString GetRequest(CString sendmsg)
 		return _T("Can't InternetOpenUrl!");
 	}
 	CString buffs;
-	Sleep(1);
-	while (1) {
-		internetreadfile = InternetReadFile(internetopenurl, buffer, sizeof(char), &byteread);
-		if (byteread == 0) {
-			InternetCloseHandle(internetopenurl);
-			break;
-		}
-		buffs += buffer[0];
-	}
-	if (internetreadfile == FALSE)
+	do
 	{
-		InternetCloseHandle(internetopenurl);
+		ZeroMemory(buffer, sizeof(buffer));
+		bRet = InternetReadFile(internetopenurl, buffer, sizeof(buffer), &byteread);
+		for (DWORD dw = 0; dw < byteread; dw++)
+		{
+			buffs += buffer[dw];
+		}
+	} while (byteread);
+	
+	//while (1) {
+	//	internetreadfile = InternetReadFile(internetopenurl, buffer, sizeof(char), &byteread);
+	//	if (byteread == 0) {
+	//		InternetCloseHandle(internetopenurl);
+	//		break;
+	//	}
+	//	buffs += buffer[0];
+	//}
+
+	InternetCloseHandle(internetopenurl);
+	if (bRet == FALSE)
+	{		
 		return _T("Can't InternetReadFile!");
 	}
 	if (buffs.GetLength() == 0)

@@ -164,6 +164,7 @@ CString GetRequest(CString sendmsg)
 	CString buffs;
 	do
 	{
+		Sleep(1000);
 		ZeroMemory(buffer, sizeof(buffer));
 		bRet = InternetReadFile(internetopenurl, buffer, sizeof(buffer), &byteread);
 		for (DWORD dw = 0; dw < byteread; dw++)

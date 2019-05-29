@@ -18,6 +18,9 @@
 #include "HuobiApi/huobiAPI.h"
 #pragma comment(lib,"wininet.lib")
 
+#define BLACK RGB(0,0,0)
+#define GREEN RGB(0, 128, 0)
+#define RED RGB(255, 0, 0)
 // CTrafficMonitorDlg 对话框
 
 //静态成员初始化
@@ -104,27 +107,51 @@ void CTrafficMonitorDlg::ShowInfo()
 	CString str;
 	// CString in_speed = CCommon::DataSizeToString(theApp.m_in_speed, theApp.m_main_wnd_data);
 	// CString out_speed = CCommon::DataSizeToString(theApp.m_out_speed, theApp.m_main_wnd_data);
-	CString in_speed(theApp.m_bch_price);
-	CString out_speed(theApp.m_btc_price);
+	double in_speed(theApp.m_bch_price);
+	double out_speed(theApp.m_btc_price);
+	// COLORREF strBchColor = BLACK;
+	// COLORREF strBtcColor = BLACK;
+	if (in_speed > theApp.m_last_bch_price)
+	{
+		theApp.m_last_bch_color = RED; // 涨显示为红色
+	}
+	else if (in_speed < theApp.m_last_bch_price)
+	{
+		theApp.m_last_bch_color = GREEN; // 跌显示为绿色
+	}
+
+	if (out_speed > theApp.m_last_btc_price)
+	{
+		theApp.m_last_btc_color = RED; // 涨显示为红色
+	}
+	else if (in_speed < theApp.m_last_btc_price)
+	{
+		theApp.m_last_btc_color = GREEN; // 跌显示为绿色
+	}
 
 	CString format_str;
 	if (theApp.m_main_wnd_data.hide_unit && theApp.m_main_wnd_data.speed_unit != SpeedUnit::AUTO)
 		format_str = _T("%s%s");
 	else
 		format_str = _T("%s%s/s");
-	format_str = _T("%s%s");
+	format_str = _T("%s%.2f");
 	if (!theApp.m_main_wnd_data.swap_up_down)
 	{
-		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.up.c_str()), out_speed.GetString());
+		// 设置涨跌文字颜色
+		// m_disp_up.SetBackColor(RGB(255,255,255));
+		// m_disp_down.SetBackColor(RGB(255, 255, 255));
+		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.up.c_str()), out_speed);
 		m_disp_up.SetWindowTextEx(str, (theApp.m_cfg_data.m_show_more_info ? m_layout_data.up_align_l : m_layout_data.up_align_s));
-		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.down.c_str()), in_speed.GetString());
+		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.down.c_str()), in_speed);
 		m_disp_down.SetWindowTextEx(str, (theApp.m_cfg_data.m_show_more_info ? m_layout_data.down_align_l : m_layout_data.down_align_s));
+		m_disp_up.SetTextColor(theApp.m_last_btc_color);
+		m_disp_down.SetTextColor(theApp.m_last_bch_color);
 	}
 	else		//交换上传和下载位置
 	{
-		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.down.c_str()), in_speed.GetString());
+		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.down.c_str()), in_speed);
 		m_disp_up.SetWindowTextEx(str, (theApp.m_cfg_data.m_show_more_info ? m_layout_data.up_align_l : m_layout_data.up_align_s));
-		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.up.c_str()), out_speed.GetString());
+		str.Format(format_str, (m_layout_data.no_text ? _T("") : theApp.m_main_wnd_data.disp_str.up.c_str()), out_speed);
 		m_disp_down.SetWindowTextEx(str, (theApp.m_cfg_data.m_show_more_info ? m_layout_data.down_align_l : m_layout_data.down_align_s));
 	}
 	if (theApp.m_main_wnd_data.hide_percent)
@@ -150,6 +177,8 @@ void CTrafficMonitorDlg::ShowInfo()
 		m_disp_cpu.ShowWindow(m_layout_data.show_cpu_s ? SW_SHOW : SW_HIDE);
 		m_disp_memory.ShowWindow(m_layout_data.show_memory_s ? SW_SHOW : SW_HIDE);
 	}
+	theApp.m_last_btc_price = theApp.m_btc_price;
+	theApp.m_last_bch_price = theApp.m_bch_price;
 }
 
 CString CTrafficMonitorDlg::GetMouseTipsInfo()
@@ -935,13 +964,13 @@ UINT CTrafficMonitorDlg::GetCoinPriceThreadFunc(LPVOID lpParam)
 		CString instr[2] = { _T("symbol"), _T("=btcusdt") };
 		CString msg = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr, 2);
 		// wcout << "btcusdt\t" << msg.GetString() << endl;
-		theApp.m_btc_price = msg;
+		theApp.m_btc_price = _wtof(msg.GetString());
 		Sleep(200);
 
 		CString instr2[2] = { _T("symbol"), _T("=bchusdt") };
 		CString msg2 = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr2, 2);
 		// wcout << "bchusdt\t" << msg2.GetString() << endl;
-		theApp.m_bch_price = msg2;
+		theApp.m_bch_price = _wtof(msg2.GetString());
 		p_instance->ShowInfo();
 		Sleep(200);
 	}

@@ -11,12 +11,19 @@
 #define new DEBUG_NEW
 #endif
 
-#include "HuobiApi/hmac-sha256.h"
-#include "HuobiApi/base64.h" 
-#include "HuobiApi/my_URL.h"
-#include "HuobiApi/time2xtime.h"
-#include "HuobiApi/huobiAPI.h"
-#pragma comment(lib,"wininet.lib")
+//#include "HuobiApi/hmac-sha256.h"
+//#include "HuobiApi/base64.h" 
+//#include "HuobiApi/my_URL.h"
+//#include "HuobiApi/time2xtime.h"
+//#include "HuobiApi/huobiAPI.h"
+//#pragma comment(lib,"wininet.lib")
+
+#pragma comment(lib,"decnumber.lib")
+#pragma comment(lib,"websockets.lib")
+#pragma comment(lib,"libcurl_imp.lib")
+#pragma comment(lib,"zlib.lib")
+#pragma comment(lib,"libssl.lib")
+#pragma comment(lib,"libcrypto.lib")
 
 #define BLACK RGB(0,0,0)
 #define GREEN RGB(0, 128, 0)
@@ -949,6 +956,21 @@ BOOL CTrafficMonitorDlg::OnInitDialog()
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
+void CTrafficMonitorDlg::OnReceiveCandlestickEvent(CandlestickEvent candlestickEvent)
+{
+	if (candlestickEvent.symbol == "btcusdt")
+	{
+		theApp.m_btc_price = candlestickEvent.data.close.toDouble();
+		((CTrafficMonitorDlg*)theApp.m_pMainWnd)->ShowInfo();
+		// cout << "btcusdt:" << candlestickEvent.data.close << endl;
+	}
+	else if (candlestickEvent.symbol == "bchusdt")
+	{
+		theApp.m_bch_price = candlestickEvent.data.close.toDouble();
+		((CTrafficMonitorDlg*)theApp.m_pMainWnd)->ShowInfo();
+		// cout << "bchusdt:" << candlestickEvent.data.close << endl;
+	}
+}
 
 UINT CTrafficMonitorDlg::GetCoinPriceThreadFunc(LPVOID lpParam)
 {
@@ -956,24 +978,33 @@ UINT CTrafficMonitorDlg::GetCoinPriceThreadFunc(LPVOID lpParam)
 	CTrafficMonitorDlg* p_instance = (CTrafficMonitorDlg*)lpParam;
 	if (!IsWindow(p_instance->GetSafeHwnd()))		//如果当前对话框已经销毁，则退出线程
 		return 0;
-	huobiAPI god;
+	// huobiAPI god;
 
-	// 调用火币api获取价格
-	while (true)
-	{
-		CString instr[2] = { _T("symbol"), _T("=btcusdt") };
-		CString msg = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr, 2);
-		// wcout << "btcusdt\t" << msg.GetString() << endl;
-		theApp.m_btc_price = _wtof(msg.GetString());
-		Sleep(200);
+	// 调用火币rest api获取价格
+	
+	//while (true)
+	//{
+	//	CString instr[2] = { _T("symbol"), _T("=btcusdt") };
+	//	CString msg = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr, 2);
+	//	// wcout << "btcusdt\t" << msg.GetString() << endl;
+	//	theApp.m_btc_price = _wtof(msg.GetString());
+	//	Sleep(200);
 
-		CString instr2[2] = { _T("symbol"), _T("=bchusdt") };
-		CString msg2 = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr2, 2);
-		// wcout << "bchusdt\t" << msg2.GetString() << endl;
-		theApp.m_bch_price = _wtof(msg2.GetString());
-		p_instance->ShowInfo();
-		Sleep(200);
-	}
+	//	CString instr2[2] = { _T("symbol"), _T("=bchusdt") };
+	//	CString msg2 = god.GetMarketDetailMerged(_T("/market/detail/merged"), instr2, 2);
+	//	// wcout << "bchusdt\t" << msg2.GetString() << endl;
+	//	theApp.m_bch_price = _wtof(msg2.GetString());
+	//	p_instance->ShowInfo();
+	//	Sleep(200);
+	//}
+	
+
+	// 使用火币websocket查询币价
+
+	SubscriptionClient* client = createSubscriptionClient();
+	client->subscribeCandlestickEvent("btcusdt", CandlestickInterval::min1, OnReceiveCandlestickEvent);
+	client->subscribeCandlestickEvent("bchusdt", CandlestickInterval::min1, OnReceiveCandlestickEvent);
+	client->startService();
 	return 0;
 }
 

@@ -19,6 +19,9 @@
 #include "LinkStatic.h"
 #include "AdapterCommon.h"
 #include "AboutDlg.h"
+#include <Huobi/HuobiClient.h>
+using namespace Huobi;
+using namespace std;
 
 // CTrafficMonitorDlg 对话框
 class CTrafficMonitorDlg : public CDialogEx
@@ -41,6 +44,7 @@ public:
 protected:
 	CWinThread* m_pGetCoinPriceThread;			//获取币价的线程
 	static UINT GetCoinPriceThreadFunc(LPVOID lpParam);
+	static void OnReceiveCandlestickEvent(CandlestickEvent candlestickEvent);
 	HICON m_hIcon;
 	CMenu m_menu;		//右键菜单对象
 	NOTIFYICONDATA m_ntIcon;	//通知区域图标

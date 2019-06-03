@@ -115,8 +115,8 @@
     <Filter Include="源文件和头文件\公共的类\CVariant">
       <UniqueIdentifier>{1ca17ad5-07ba-4361-bbeb-fdc5047697fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件和头文件\HuobiApi">
-      <UniqueIdentifier>{ef45eff7-0b1f-458d-8131-5575186b6dfa}</UniqueIdentifier>
+    <Filter Include="源文件和头文件\HuobiWebsocketApi">
+      <UniqueIdentifier>{e781bdc4-14a9-49ca-b556-af38632302ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -252,23 +252,77 @@
     <ClInclude Include="DrawCommonEx.h">
       <Filter>源文件和头文件\公共的类\DrawCommon</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\base64.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\AccountsInfoMap.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\hmac-sha256.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\EtfResult.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\huobiAPI.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\GetHost.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\my_URL.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\InputChecker.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\NetworkRequest.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApi.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
-    <ClInclude Include="HuobiApi\time2xtime.h">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApiImpl.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApiInvoke.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\SubscriptionClientImpl.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\SyncClientImpl.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\TimeService.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\User.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketApiImpl.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketConnection.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketRequest.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketWatchDog.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\ApiSignature.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\base64.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\ChannelParser.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\Channels.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\gzip.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonDocument.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonWrapper.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonWriter.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\UrlParamsBuilder.h">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,23 +443,53 @@
     <ClCompile Include="DrawCommonEx.cpp">
       <Filter>源文件和头文件\公共的类\DrawCommon</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\base64.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\AccountsInfoMap.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\hmac-sha256.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\ClientCreator.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\huobiAPI.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\Enums.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\my_URL.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\HuobiApiException.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\NetworkRequest.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\InputChecker.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
-    <ClCompile Include="HuobiApi\time2xtime.cpp">
-      <Filter>源文件和头文件\HuobiApi</Filter>
+    <ClCompile Include="..\..\huobi_Cpp\src\Logger.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\RestApiImpl.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\SubscriptionClientImpl.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\SyncClientImpl.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketApiImpl.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketConnection.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketWatchDog.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\base64.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\gzip.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\JsonDocument.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\JsonWrapper.cpp">
+      <Filter>源文件和头文件\HuobiWebsocketApi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

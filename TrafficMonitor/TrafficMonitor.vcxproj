@@ -78,14 +78,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\boost\boost_1_70_0;$(IncludePath)</IncludePath>
+    <IncludePath>D:\work\code\coin\zlib-1.2.11\build\include;D:\Users\Downloads\libwebsockets-3.1.0\build\include;D:\work\code\coin\curl-7.65.0\build\include;D:\work\code\coin\huobi_Cpp\3rdparty\libdecnumber\build\include;D:\work\code\coin\huobi_Cpp\include;C:\boost\boost_1_70_0;D:\work\code\coin\openssl-OpenSSL_1_1_1c\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\boost\boost_1_70_0;$(IncludePath)</IncludePath>
+    <IncludePath>D:\work\code\coin\zlib-1.2.11\build\include;D:\Users\Downloads\libwebsockets-3.1.0\build\include;D:\work\code\coin\curl-7.65.0\build\include;D:\work\code\coin\huobi_Cpp\3rdparty\libdecnumber\build\include;D:\work\code\coin\huobi_Cpp\include;C:\boost\boost_1_70_0;D:\work\code\coin\openssl-OpenSSL_1_1_1c\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -117,11 +117,17 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>C:\boost\boost_1_70_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\work\code\coin\zlib-1.2.11\build\lib;D:\work\code\coin\huobi_Cpp\3rdparty\libdecnumber\build\lib;D:\Users\Downloads\libwebsockets-3.1.0\build\lib;D:\work\code\coin\curl-7.65.0\build\lib;D:\work\code\coin\openssl-OpenSSL_1_1_1c;C:\boost\boost_1_70_0\stage\lib;D:\work\code\coin\huobi_Cpp\build\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalOptions>/force %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -169,14 +175,20 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\boost\boost_1_70_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\work\code\coin\zlib-1.2.11\build\lib;D:\work\code\coin\huobi_Cpp\3rdparty\libdecnumber\build\lib;D:\Users\Downloads\libwebsockets-3.1.0\build\lib;D:\work\code\coin\curl-7.65.0\build\lib;D:\work\code\coin\openssl-OpenSSL_1_1_1c;C:\boost\boost_1_70_0\stage\lib;D:\work\code\coin\huobi_Cpp\build\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OutputFile>$(OutDir)CoinPriceMonitor$(TargetExt)</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalOptions>/force %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -194,6 +206,30 @@
     <Text Include="res\Acknowledgement.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\huobi_Cpp\src\AccountsInfoMap.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\EtfResult.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\GetHost.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\InputChecker.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApi.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApiImpl.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\RestApiInvoke.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\SubscriptionClientImpl.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\SyncClientImpl.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\TimeService.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\User.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\ApiSignature.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\base64.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\ChannelParser.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\Channels.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\gzip.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonDocument.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonWrapper.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\JsonWriter.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\Utils\UrlParamsBuilder.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketApiImpl.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketConnection.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketRequest.h" />
+    <ClInclude Include="..\..\huobi_Cpp\src\WebSocketWatchDog.h" />
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="AdapterCommon.h" />
     <ClInclude Include="CalendarHelper.h" />
@@ -204,12 +240,6 @@
     <ClInclude Include="DrawCommonEx.h" />
     <ClInclude Include="HistoryTrafficCalendarDlg.h" />
     <ClInclude Include="HistoryTrafficListDlg.h" />
-    <ClInclude Include="HuobiApi\base64.h" />
-    <ClInclude Include="HuobiApi\hmac-sha256.h" />
-    <ClInclude Include="HuobiApi\huobiAPI.h" />
-    <ClInclude Include="HuobiApi\my_URL.h" />
-    <ClInclude Include="HuobiApi\NetworkRequest.h" />
-    <ClInclude Include="HuobiApi\time2xtime.h" />
     <ClInclude Include="LinkStatic.h" />
     <ClInclude Include="ColorStatic.h" />
     <ClInclude Include="Common.h" />
@@ -244,6 +274,70 @@
     <ClInclude Include="WinVersionHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\huobi_Cpp\src\AccountsInfoMap.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\ClientCreator.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Enums.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\HuobiApiException.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\InputChecker.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Logger.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\RestApiImpl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\SubscriptionClientImpl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\SyncClientImpl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\base64.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\gzip.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\JsonDocument.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\Utils\JsonWrapper.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketApiImpl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketConnection.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\huobi_Cpp\src\WebSocketWatchDog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="AdapterCommon.cpp" />
     <ClCompile Include="CalendarHelper.cpp" />
@@ -254,24 +348,6 @@
     <ClCompile Include="DrawCommonEx.cpp" />
     <ClCompile Include="HistoryTrafficCalendarDlg.cpp" />
     <ClCompile Include="HistoryTrafficListDlg.cpp" />
-    <ClCompile Include="HuobiApi\base64.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="HuobiApi\hmac-sha256.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="HuobiApi\huobiAPI.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="HuobiApi\my_URL.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="HuobiApi\NetworkRequest.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="HuobiApi\time2xtime.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="LinkStatic.cpp" />
     <ClCompile Include="ColorStatic.cpp" />
     <ClCompile Include="Common.cpp" />
